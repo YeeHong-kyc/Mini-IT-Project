@@ -36,7 +36,7 @@ def home():
 def create_item():
     name = request.form["name"]
     description = request.form["description"]
-    
+
     new_item = Item(name = name, description = description)
     db.session.add(new_item)
     db.session.commit()
