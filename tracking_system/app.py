@@ -46,3 +46,6 @@ def create_item():
         "qr_code_url": f"/qrcode/{new_item.code}",
         "tracking_url": f"/track/{new_item.code}"
     })
+
+
+# To Be Continued...
