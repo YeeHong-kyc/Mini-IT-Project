@@ -13,3 +13,5 @@ MMU_BOUNDS = {
     "min_lng" : 101.6120,
     "max_lng" : 101.6170
 }
+
+# lat: latitude, lng: longitude
