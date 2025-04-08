@@ -26,3 +26,23 @@ class Scan(db.Model):
     scanned_at = db.Column(db.DateTime, default = datetime.utcnow)
     latitude = db.Column(db.Float)
     longitude = db.Column(db.Float)
+
+# Routes
+@app.route("/")
+def home():
+    return render_template("create_item.html")
+
+@app.route("/create-item", methods = ["POST"])
+def create_item():
+    name = request.form["name"]
+    description = request.form["description"]
+    
+    new_item = Item(name = name, description = description)
+    db.session.add(new_item)
+    db.session.commit()
+
+    return jsonify({
+        "item_id": new_item.id,
+        "qr_code_url": f"/qrcode/{new_item.code}",
+        "tracking_url": f"/track/{new_item.code}"
+    })
