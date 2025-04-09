@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify, send_from_directory
+from flask import Flask, render_template, request, jsonify, send_from_directory, current_app
 from flask_sqlalchemy import SQLAlchemy
 from flask_qrcode import QRcode
 from datetime import datetime
@@ -27,6 +27,17 @@ class Scan(db.Model):
     latitude = db.Column(db.Float)
     longitude = db.Column(db.Float)
 
+# Functions
+def validate_location(lat, lng):
+    bounds = app.config["MMU_BOUNDS"]
+    try:
+        lat = float(lat)
+        lng = float(lng)
+        return (bounds["min_lat"] <= lat <= bounds["max_lat"] and
+                bounds["min_lng"] <= lng <= bounds["max_lng"])
+    except ValueError:
+        return False
+
 # Routes
 @app.route("/")
 def home():
@@ -46,6 +57,29 @@ def create_item():
         "qr_code_url": f"/qrcode/{new_item.code}",
         "tracking_url": f"/track/{new_item.code}"
     })
+
+@app.route("/track/<string:code>", methods = ["GET", "POST"])
+def track_item(code):
+    item = Item.query.filter_by(code = code).first_or_404()
+
+    if request.method == "POST":
+        # Handle location data from mobile devices
+        lat = request.json.get("lat")
+        lng = request.json.get("lng")
+
+        if validate_location(lat, lng):
+            new_scan = Scan(item_id = item.id, latitude = lat, longitude = lng)
+            db.session.add(new_scan)
+            db.session.commit()
+            return jsonify({"status": "success"})
+    
+        return jsonify({"status": "error", "message": "Location outside campus"}), 400
+    
+    # For QR code scanning
+    return render_template("track_item.html",
+                           item = item,
+                           scan_count = len(item.scans),
+                           last_scan = item.scans[-1] if item.scans else None)
 
 
 # To Be Continued...
