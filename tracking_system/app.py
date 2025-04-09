@@ -11,6 +11,7 @@ app.config.from_object(Config)
 db = SQLAlchemy(app)
 QRcode(app)
 
+
 # Database Models
 class Item(db.Model):
     id = db.Column(db.Integer, primary_key = True)
@@ -27,16 +28,6 @@ class Scan(db.Model):
     latitude = db.Column(db.Float)
     longitude = db.Column(db.Float)
 
-# Functions
-def validate_location(lat, lng):
-    bounds = app.config["MMU_BOUNDS"]
-    try:
-        lat = float(lat)
-        lng = float(lng)
-        return (bounds["min_lat"] <= lat <= bounds["max_lat"] and
-                bounds["min_lng"] <= lng <= bounds["max_lng"])
-    except ValueError:
-        return False
 
 # Routes
 @app.route("/")
@@ -81,5 +72,38 @@ def track_item(code):
                            scan_count = len(item.scans),
                            last_scan = item.scans[-1] if item.scans else None)
 
+@app.route("/item/<string:code>")
+def item_details(code):
+    item = Item.query.filter_by(code = code).first_or_404()
+    return render_template("item_details.html",
+                           item = item,
+                           scans = item.scans,
+                           mmu_bounds = app.config["MMU_BOUNDS"])
 
-# To Be Continued...
+@app.route("/qrcode/<string:code>")
+def generate_qrcode(code):
+    return send_from_directory(app.config["QR_CODE_DIR"], f"{code}.png")
+
+
+#Helper Functions
+def validate_location(lat, lng):
+    bounds = app.config["MMU_BOUNDS"]
+    try:
+        lat = float(lat)
+        lng = float(lng)
+        return (bounds["min_lat"] <= lat <= bounds["max_lat"] and
+                bounds["min_lng"] <= lng <= bounds["max_lng"])
+    except ValueError:
+        return False
+
+
+if __name__ == "__main__":
+    with app.app_context():
+        db.create_all()
+        if not os.path.exists(app.config["QR_CODE_DIR"]):
+            os.makedirs(app.config["QR_CODE_DIR"])
+    app.run(debug = True)
+
+
+
+# To Be Modified...
