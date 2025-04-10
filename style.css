@@ -15,6 +15,7 @@ body {
     align-items: center;
     min-height: 100vh;
     background-image: url('Image/1280_720_2.jpg');
+    background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
 }
