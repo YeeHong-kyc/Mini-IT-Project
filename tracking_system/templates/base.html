@@ -5,6 +5,12 @@
         <link rel = "stylesheet" href = "{{url_for('static', filename = 'styles/main.css')}}">
     </head>
     <body>
-        {% block content %}{% endblock %}
+        {% block content %}{% endblock %}  <!-- Content injection point -->
     </body>
 </html>
+
+<!--
+This is a base tamplate for the child templates below.
+It uses Django's block template tag to create reusable HTML templates.
+This is to prevent wasting of time typing same templates to all html files.
+-->
