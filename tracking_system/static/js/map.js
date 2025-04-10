@@ -37,3 +37,6 @@ function getLocation() {
 
 // Call this when QR Code is scanned
 getLocation();
+
+
+// To Be Modified...
