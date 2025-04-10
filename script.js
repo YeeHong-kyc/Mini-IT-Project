@@ -18,6 +18,12 @@ function checkPassword(){
         return;
     }
     
+    if(passwordField != confirmPasswordField){
+        alert("Password must be same!");
+        message.textContent="Password must be same!";
+        return;
+    }
+
     if(passwordField === confirmPasswordField){
          message.textContent = "Password Match";
          message.style.backgroundcolor = "#1dcd59"
