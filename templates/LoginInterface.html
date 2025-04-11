@@ -7,7 +7,7 @@
     <meta name="viewport" content="wight=device-width,
     initial-scale=1.0">
     <title>Where is My MMU Stuff</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+    <link rel="stylesheet" href="/static/styles/style.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
 </head>
@@ -31,12 +31,12 @@
                 </div>
                 <div class="remember-forget">
                     <label><input type="checkbox"> Remember me</label>
-                    <a href="confirmPassword.html">Forgot password?</a>
+                    <a href="{{ url_for('confirm') }}">Forgot Password?</a>
                 </div>
                 <button type="submit" class="button">Login</button>
 
                 <div class="register-link">
-                    <p>Don't have an account? <a href="Register.html">Register</a></p>
+                    <p>Don't have an account? <a href="{{ url_for('register') }}">Register</a></p>
                 </div>
             <!--</div>-->
         </form>
