@@ -1,6 +1,6 @@
 // Initialize the map when the page loads
 document.addEventListener('DOMContentLoaded', function() {
-    //Check if we are on the map page
+    // Check if we're on the map page
     if (document.getElementById('map')) {
         initMap();
     }
