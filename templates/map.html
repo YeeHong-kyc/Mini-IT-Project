@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>{{ item.name }} - Tracking Map</h2>
+<p>Last scanned: {{ locations[0].time if locations else 'Never' }}</p>
+
+<div id="map" style="height: 500px; width: 100%;"></div>
+
+<div class="mt-3">
+    <h4>Scan Locations</h4>
+    <ul class="list-group">
+        {% for loc in locations %}
+        <li class="list-group-item">
+            {{ loc.time }} - IP: {{ loc.ip }}
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<script src="{{ url_for('static', filename='js/map.js') }}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const center = {{ center|tojson }};
+        const locations = {{ locations|tojson }};
+        initMap(center, locations);
+    });
+</script>
+{% endblock %}

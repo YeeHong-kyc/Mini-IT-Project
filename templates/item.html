@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <h2>{{ item.name }}</h2>
+        <p>{{ item.description }}</p>
+        <p><strong>Created:</strong> {{ item.created_at.strftime('%Y-%m-%d') }}</p>
+        
+        <div class="mt-4">
+            <h4>QR Code</h4>
+            <img src="{{ url_for('static', filename=item.qr_code_path) }}" alt="QR Code" class="img-fluid" style="max-width: 200px;">
+            <div class="mt-2">
+                <a href="{{ url_for('static', filename=item.qr_code_path) }}" download class="btn btn-secondary">Download QR Code</a>
+            </div>
+        </div>
+        
+        <div class="mt-4">
+            <a href="{{ url_for('share_item', item_id=item.id) }}" class="btn btn-info">Share Item</a>
+            <a href="{{ url_for('item_map', item_id=item.id) }}" class="btn btn-success">View on Map</a>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <h3>Scan History</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Time</th>
+                    <th>IP Address</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for scan in scans %}
+                <tr>
+                    <td>{{ scan.scan_time.strftime('%Y-%m-%d %H:%M') }}</td>
+                    <td>{{ scan.scanner_ip }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

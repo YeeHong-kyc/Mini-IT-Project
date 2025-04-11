@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="text-center">
+    <h2>Item Scanned: {{ item.name }}</h2>
+    <p>Scanned at: {{ scan.scan_time.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+    
+    <div class="alert alert-info mt-4">
+        <h4>This item belongs to {{ item.owner.name }}</h4>
+        <p>If found, please contact the owner.</p>
+    </div>
+    
+    <a href="{{ url_for('index') }}" class="btn btn-primary">Return to Home</a>
+</div>
+{% endblock %}

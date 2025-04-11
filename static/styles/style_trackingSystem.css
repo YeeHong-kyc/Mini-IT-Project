@@ -1,0 +1,60 @@
+/* Custom styles for the tracker */
+
+/* General styles */
+body {
+    padding-top: 20px;
+    background-color: #f8f9fa;
+}
+
+.card {
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* QR code display */
+.qr-code-container {
+    text-align: center;
+    padding: 20px;
+    background-color: white;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+/* Map container */
+#map {
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+/* Scan history table */
+.scan-history {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+/* Form styles */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+/* Alert customization */
+.alert {
+    border-radius: 5px;
+}
+
+/* Navbar customization */
+.navbar {
+    margin-bottom: 30px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .card {
+        margin-bottom: 15px;
+    }
+}
