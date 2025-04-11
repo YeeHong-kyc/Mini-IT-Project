@@ -19,8 +19,8 @@ function checkPassword(){
     }
     
     if(passwordField != confirmPasswordField){
-        alert("Password must be same!");
-        message.textContent="Password must be same!";
+        alert("Both passwords must be identical.");
+        message.textContent="Both passwords must be identical.";
         return;
     }
 
