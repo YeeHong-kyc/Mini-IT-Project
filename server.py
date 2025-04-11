@@ -8,7 +8,7 @@ def home():
 
 @app.route('/register')
 def register():
-    return render_template('register.html')
+    return render_template('Register.html')
 
 @app.route('/confirm')
 def confirm():
@@ -16,4 +16,3 @@ def confirm():
 
 if __name__ == '__main__':
     app.run(debug=True)
-    
