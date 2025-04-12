@@ -7,3 +7,85 @@
   font-family: 'Poppins', sans-serif;
 }
 
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: url('Image/1280_720_2.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.email {
+    width: 480px;
+    background-color: transparent;
+    color: rgb(255, 255, 255);
+    border-radius: 10px;
+    padding: 30px 40px;
+    text-align: center;
+}
+
+.email h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+
+.psw-repeat {
+    width: 480px;
+    background-color: transparent;
+    color: rgb(255, 255, 255);
+    border-radius: 10px;
+    padding: 30px 40px;
+    text-align: center;
+}
+
+.psw-repeat h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.email.button {
+    width: 100%;
+    height: 45px;
+    background: #fff;
+    color: #333;
+    border: none;
+    border-radius: 40px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    outline: none;
+}
+
+.container { width: 480px;
+    background-color: transparent;
+    color: rgb(255, 255, 255);
+    border-radius: 10px;
+    padding: 30px 40px;
+    text-align: center;
+}
+
+.container h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.containersignin {
+    font-size: 14.5px;
+    text-align: center;
+    margin: 20px 0 15px;
+}
+
+.containersignin p a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.containersignin p a:hover {
+    text-decoration: underline;
+}
