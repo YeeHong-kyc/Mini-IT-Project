@@ -9,7 +9,7 @@
             <div class="card-body">
                 <h5 class="card-title">{{ item.name }}</h5>
                 <p class="card-text">{{ item.description }}</p>
-                <a href="{{ url_for('view_item', item_id=item.id) }}" class="btn btn-primary">View Details</a>
+                <a href="{{ url_for('item', item_id=item.id) }}" class="btn btn-primary">View Details</a>
             </div>
         </div>
     </div>
@@ -24,7 +24,7 @@
             <div class="card-body">
                 <h5 class="card-title">{{ shared.item.name }}</h5>
                 <p class="card-text">Shared by: {{ shared.item.owner.name }}</p>
-                <a href="{{ url_for('view_item', item_id=shared.item.id) }}" class="btn btn-primary">View Details</a>
+                <a href="{{ url_for('item', item_id=shared.item.id) }}" class="btn btn-primary">View Details</a>
             </div>
         </div>
     </div>
