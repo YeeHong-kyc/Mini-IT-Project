@@ -4,30 +4,47 @@
   <meta charset="UTF-8">
   <title>Register</title>
   <link rel="stylesheet" href="/static/styles/style_register.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
   <form action="/action_page.php">
-    <div class="container">
-      <h1>Register</h1>
+     <div class="container">
+           <h1>Register</h1>
       <p>Please fill in this form to create an account.</p>
 
-      <div class="email"><b>Email</b>
-      <div class="box"></div>
-      <input type="text" placeholder="Enter Email" name="email" id="email" required>
+    <div class="email"><b>Email</b>
+              <div class="input-box"></div>
+              <input type="text" placeholder="Enter Email" name="email" id="email" required>
+              <i class='bx bxl-gmail' ></i>
     </div>
-      <div class="password"><b>Password</b>
-      <div class="box"></div>
-      <input type="password" placeholder="Enter Password" name="psw" id="0001" required>
+    <div class="password"><b>Password</b>
+              <div class="input-box"></div>
+              <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
+              <i class='bx bxs-lock-alt'></i>
     </div>
-      <div class="psw-repeat"><b>Repeat Password</b>
-      <div class="box"></div>
-      <input type="password" placeholder="Repeat Password" name="psw-repeat" id="0002" required>
-
+    <div class="psw-repeat"><b>Repeat Password</b>
+              <div class="input-box"></div>
+              <input type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat" required>
+              <i class='bx bxs-lock-open-alt' ></i>
+    </div>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+             <div class="register">
       <button type="submit" class="registerbtn">Register</button>
     </div>
 
     <div class="containersignin">
-      <p>Already have an account? <a href="LoginInterface.html">Sign in</a>.</p>
+             <p>Already have an account? <a href="LoginInterface.html">Sign in</a>.</p>
     </div>
   </form>
 </body>

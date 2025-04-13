@@ -1,8 +1,11 @@
+var passwordField = document.getElementById("0001").value.trim();
+var confirmPasswordField = document.getElementById("0002").value.trim();
+var message = document.getElementById("message");
+var submitButton = document.getElementById("Submit");
+
+
 function checkPassword(){
-    
-    var passwordField = document.getElementById("0001").value.trim();
-    var confirmPasswordField = document.getElementById("0002").value.trim();
-    var message = document.getElementById("message");
+   
 
     //const password = passwordField.ariaValueMax.trim();
     //const confirmPassword = confirmPasswordField.ariaValueMax.trim();
@@ -11,6 +14,8 @@ function checkPassword(){
     console.log(confirmPasswordField);
     console.log(passwordField == "");
     console.log(confirmPasswordField == "");
+    
+    
     
     if(passwordField == "" || confirmPasswordField == ""){
         alert("Both password are required");
@@ -33,4 +38,15 @@ function checkPassword(){
         message.style.backgroundcolor ="#ff4d4d"
     }
 
+}
+function checkText(){
+    console.log(passwordField);
+    console.log(confirmPasswordField);
+    console.log(submitButton);
+
+    if (passwordField.value && confirmPasswordField.value){
+        submitButton.disabled = false
+    }else{
+        submitButton.disabled = true
+    }
 }

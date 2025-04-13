@@ -50,7 +50,7 @@ body {
     border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: 40px;
     font-size: 16px;
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
     padding: 20px 45px 20px 20px;
     outline: none;
 }
@@ -77,7 +77,7 @@ body {
 }
 
 .remember-forget label input {
-    accent-color: #fff;
+    accent-color: #ffffff;
     margin-right: 3px;
 }
 
