@@ -1,0 +1,16 @@
+How To Run:
+1. Create virtual environment
+    - in cmd (or powershell), type this:
+        venv\Scripts\activate
+
+2. Initialise the database
+    - in cmd (or powershell), type this:
+        (i) set FLASK_APP=app.py
+        (ii) flask shell
+        (iii) from app import db
+              db.create_all()
+              exit()
+
+3. Run the application
+    - in cmd (or powershell), type this:
+        flask run
