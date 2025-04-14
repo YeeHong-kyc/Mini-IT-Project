@@ -10,7 +10,7 @@ def home():
 def register():
     return render_template('Register.html')
 
-@app.route('/confirm')
+@app.route('/confirm/')
 def confirm():
     return render_template('confirmPassword.html')
 
