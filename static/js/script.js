@@ -17,36 +17,32 @@ function checkPassword(){
     
     
     
-    if(passwordField == "" || confirmPasswordField == ""){
-        alert("Both password are required");
-        message.textContent="Both password are required";
-        return;
-    }
-    
-    if(passwordField != confirmPasswordField){
-        alert("Both passwords must be identical.");
-        message.textContent="Both passwords must be identical.";
-        return;
+function checkPassword() {
+    var pass1 = document.getElementById("0001").value;
+    var pass2 = document.getElementById("0002").value;
+
+    if (!pass1 || !pass2) {
+        alert("Either Password box or Confirm Password box cannot be null");
+        return false; // prevent form submission
     }
 
-    if(passwordField === confirmPasswordField){
-         message.textContent = "Password Match";
-         message.style.backgroundcolor = "#1dcd59"
-    }
-    else{
-        message.textContent="Password Don't Match!";
-        message.style.backgroundcolor ="#ff4d4d"
+    if (pass1 !== pass2) {
+        alert("Passwords do not match");
+        return false;
     }
 
+    return true; // allow form submission
 }
-function checkText(){
-    console.log(passwordField);
-    console.log(confirmPasswordField);
-    console.log(submitButton);
 
-    if (passwordField.value && confirmPasswordField.value){
-        submitButton.disabled = false
-    }else{
-        submitButton.disabled = true
-    }
-}
+//}
+//function checkText(){
+//    console.log(passwordField);
+//    console.log(confirmPasswordField);
+//    console.log(submitButton);
+//
+//    if (passwordField.value && confirmPasswordField.value){
+//        submitButton.disabled = false
+//    }else{
+//        submitButton.disabled = true
+//    }
+//}

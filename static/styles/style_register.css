@@ -20,10 +20,11 @@ body {
 
 #email, #psw, #psw-repeat {
     
-    width: 480px;
+    width: 350px;
+    height: 50px;
     background-color: #b7e8ea;
     color: rgb(8, 0, 0);
-    text-align: center;
+    text-align: left
     border: 2px solid rgba(0, 0, 0, 0.2);
     border-radius: 40px;
     font-size: 16px;
@@ -105,11 +106,11 @@ hr {
 }
 
 .input-box input::placeholder {
-    color: rgb(0, 5, 10);
+    color: black;
 }
 
 .input-box input {
-    width: 100%;
+    width: 80px;
     padding: 15px 45px 15px 15px;
     border-radius: 30px;
     border: 1px solid #000000;
