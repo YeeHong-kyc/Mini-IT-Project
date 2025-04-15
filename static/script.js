@@ -14,7 +14,7 @@ function checkPassword(){
     console.log(confirmPasswordField);
     console.log(passwordField == "");
     console.log(confirmPasswordField == "");
-    
+}
     
     
 function checkPassword() {
