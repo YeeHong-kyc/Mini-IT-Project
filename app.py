@@ -88,32 +88,20 @@ def scan_item(item_id):
     
     return render_template('scan.html', item=item, scan=scan)
 
+# General map (all items)
+@app.route('/map')
+def map():
+    mmu_coords = {'lat': 3.0648, 'lng': 101.6045, 'zoom': 16}
+    items = Item.query.filter_by(owner_id=1).all()  # Demo: user_id=1
+    return render_template('map.html', item={'name': 'All Items'}, center=mmu_coords, locations=items)
+
+# Specific item map
 @app.route('/item/<int:item_id>/map')
 def item_map(item_id):
     item = Item.query.get_or_404(item_id)
-    scans = ScanHistory.query.filter_by(item_id=item_id).order_by(ScanHistory.scan_time.desc()).all()
-    
-    # Select MMU campus coordinates
-    mmu_coords = {
-        'lat': 3.0648,
-        'lng': 101.6045,
-        'zoom': 16
-    }
-    
-    # Mock scan locations around MMU
-    scan_locations = []
-    for i, scan in enumerate(scans[:5]):  # Limit to 5 most recent
-        scan_locations.append({
-            'lat': mmu_coords['lat'] + (i * 0.0005),
-            'lng': mmu_coords['lng'] + (i * 0.0005),
-            'time': scan.scan_time.strftime('%Y-%m-%d %H:%M:%S'),
-            'ip': scan.scanner_ip
-        })
-    
-    return render_template('map.html', 
-                         item=item, 
-                         center=mmu_coords, 
-                         locations=scan_locations)
+    scans = ScanHistory.query.filter_by(item_id=item_id).all()
+    mmu_coords = {'lat': 3.0648, 'lng': 101.6045, 'zoom': 16}
+    return render_template('map.html', item=item, center=mmu_coords, locations=scans)
 
 @app.route('/item/<int:item_id>/share', methods=['GET', 'POST'])
 def share_item(item_id):
@@ -140,6 +128,13 @@ def share_item(item_id):
     
     shared_with = db.session.query(User).join(SharedItem).filter(SharedItem.item_id == item_id).all()
     return render_template('share.html', item=item, shared_with=shared_with)
+
+@app.route('/shared-items')
+def shared_items():
+    """Show all items shared with current user"""
+    user_id = 1  # Replace with actual user ID from session
+    shared_items = SharedItem.query.filter_by(user_id=user_id).all()
+    return render_template('shared_items.html', shared_items=shared_items)
 
 @app.route('/qrcodes/<path:filename>')
 def serve_qrcode(filename):
