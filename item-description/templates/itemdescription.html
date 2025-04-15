@@ -10,7 +10,7 @@
   
   <style>
     body {
-      background-color: #87CEEB; /* Sky blue */
+      background-color: #87CEEB;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       color: #333;
       padding: 20px;
@@ -18,30 +18,29 @@
 
     .container {
       max-width: 600px;
-      background-color: #e6f2ff; /* Light blue */
+      background-color: #e6f2ff;
       padding: 40px;
       border-radius: 15px;
-      box-shadow: 0 6px 20px rgba(0, 0, 139, 0.2); /* Navy shadow */
+      box-shadow: 0 6px 20px rgba(0, 0, 139, 0.2);
       margin: auto;
       text-align: center;
     }
 
     h2 {
-      color: #000080; /* Navy blue */
+      color: #000080;
       font-size: 2rem;
       font-weight: bold;
       margin-bottom: 25px;
     }
 
     p.text-center {
-      color: #333;
       margin-bottom: 30px;
       font-size: 1.1rem;
     }
 
     .form-label {
       font-weight: bold;
-      color: #dc143c; /* Crimson red */
+      color: #dc143c;
       text-align: left;
       margin-bottom: 8px;
     }
@@ -65,23 +64,23 @@
       color: #555;
       font-size: 0.85rem;
       margin-bottom: 10px;
+      text-align: left;
     }
 
     .btn-primary {
-      background-color: #000080; /* Navy */
+      background-color: #000080;
       border: none;
       border-radius: 8px;
       font-weight: bold;
       padding: 14px;
       width: 100%;
       color: #fff;
-      cursor: pointer;
       font-size: 1.1rem;
       transition: background-color 0.3s, transform 0.2s;
     }
 
     .btn-primary:hover {
-      background-color: #dc143c; /* Crimson on hover */
+      background-color: #dc143c;
       transform: translateY(-2px);
     }
 
@@ -99,7 +98,6 @@
     .footer-text a:hover {
       text-decoration: underline;
     }
-
   </style>
 </head>
 
@@ -109,22 +107,22 @@
     <p class="text-center">Help us track items across MMU, whether it's a lost item or an asset.</p>
     
     <form method="POST" enctype="multipart/form-data">
-      <div class="mb-3">
+      <div class="mb-3 text-start">
         <label for="title" class="form-label">Item Name</label>
-        <input type="text" class="form-control" id="title" name="title" placeholder="E.g. Black Wallet, Red Speaker" required>
-        <div class="form-text">Be specific so we can easily identify your item. If it's an asset, include the asset code or ID.</div>
+        <input type="text" class="form-control" id="title" name="title" placeholder="E.g. Black Wallet, Red Speaker" aria-describedby="titleHelp" required>
+        <div id="titleHelp" class="form-text">Be specific so we can easily identify your item. If it's an asset, include the asset code or ID.</div>
       </div>
 
-      <div class="mb-3">
+      <div class="mb-3 text-start">
         <label for="description" class="form-label">Item Description</label>
-        <textarea class="form-control" id="description" name="description" rows="3" placeholder="Describe the item (color, brand, features)" required></textarea>
-        <div class="form-text">For asset items, add any unique tags or features.</div>
+        <textarea class="form-control" id="description" name="description" rows="3" placeholder="Describe the item (color, brand, features)" aria-describedby="descHelp" required></textarea>
+        <div id="descHelp" class="form-text">For asset items, add any unique tags or features.</div>
       </div>
 
-      <div class="mb-3">
+      <div class="mb-3 text-start">
         <label for="image" class="form-label">Upload a Photo</label>
-        <input class="form-control" type="file" id="image" name="image" accept="image/*" required>
-        <div class="form-text">A photo helps identify the item.</div>
+        <input class="form-control" type="file" id="image" name="image" accept="image/*" aria-describedby="imgHelp" required>
+        <div id="imgHelp" class="form-text">A photo helps identify the item.</div>
       </div>
 
       <button type="submit" class="btn btn-primary w-100">Submit Your Item</button>
@@ -137,7 +135,6 @@
 
   <!-- Bootstrap 5 JS CDN -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-  
 </body>
 
 </html>
