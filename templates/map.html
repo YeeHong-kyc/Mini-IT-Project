@@ -2,7 +2,7 @@
 
 {% block content %}
 <h2>{{ item.name }} - Tracking Map</h2>
-<p>Last scanned: {{ locations[0].time if locations else 'Never' }}</p>
+<p>Last scanned: {% if locations and locations[0].ip %}{{ locations[0].time }}{% else %}Never{% endif %}</p>
 
 <div id="map" style="height: 500px; width: 100%;"></div>
 
@@ -10,22 +10,23 @@
     {% if locations and locations[0].ip %}
     {# Show scan history (specific item) #}
     <h4>Scan History for {{ item.name }}</h4>
-    <ul>
+    <ul class="list-group">
         {% for scan in locations %}
-            <li>{{ scan.time }} - IP: {{ scan.ip }}</li>
+            <li class="list-group-item">{{ scan.time }} - IP: {{ scan.ip }}</li>
         {% endfor %}
     </ul>
-{% else %}
+    {% elif locations %}
     {# Show list of items (general map) #}
     <h4>All Items</h4>
-    <ul>
+    <ul class="list-group">
         {% for item in locations %}
-            <li><a href="{{ url_for('item_map', item_id=item.id) }}">{{ item.name }}</a></li>
+            <li class="list-group-item">
+                <a href="{{ url_for('item_map', item_id=item.id) }}">{{ item.name }}</a>
+            </li>
         {% endfor %}
     </ul>
-{% endif %}
+    {% endif %}
 </div>
-
 {% endblock %}
 
 {% block scripts %}
@@ -34,9 +35,9 @@
 <script src="{{ url_for('static', filename='js/map.js') }}"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const center = {{ center|tojson }};
-        const locations = {{ locations|tojson }};
-        initMap(center, locations);
+        {% if map_data %}
+        initMap({{ map_data|tojson }});
+        {% endif %}
     });
 </script>
 {% endblock %}

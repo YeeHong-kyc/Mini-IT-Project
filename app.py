@@ -12,6 +12,14 @@ app = Flask(__name__)
 app.config.from_pyfile('config.py')
 db.init_app(app)
 
+MMU_CYBERJAYA_BOUNDS = {
+    'north': 2.933639,  # Latitude
+    'south': 2.9220,
+    'west': 101.637861,  # Longitude
+    'east': 101.646833,
+    'center': {'lat': 2.92782, 'lng': 101.64235, 'zoom': 16}
+}
+
 # Create tables
 with app.app_context():
     db.create_all()
@@ -77,11 +85,23 @@ def view_item(item_id):
 def scan_item(item_id):
     item = Item.query.get_or_404(item_id)
     
+    # Get location from request 
+    lat = request.args.get('lat', default=3.0648, type=float)
+    lng = request.args.get('lng', default=101.6045, type=float)
+    
+    # Validate location is within MMU
+    if not (MMU_CYBERJAYA_BOUNDS['south'] <= lat <= MMU_CYBERJAYA_BOUNDS['north'] and
+            MMU_CYBERJAYA_BOUNDS['west'] <= lng <= MMU_CYBERJAYA_BOUNDS['east']):
+        flash('Scan location is outside MMU Cyberjaya campus', 'warning')
+        return redirect(url_for('view_item', item_id=item_id))
+    
     # Record scan
     scan = ScanHistory(
         item_id=item.id,
         scan_time=datetime.now(),
-        scanner_ip=request.remote_addr
+        scanner_ip=request.remote_addr,
+        location_lat=lat,
+        location_lng=lng
     )
     db.session.add(scan)
     db.session.commit()
@@ -91,17 +111,54 @@ def scan_item(item_id):
 # General map (all items)
 @app.route('/map')
 def map():
-    mmu_coords = {'lat': 3.0648, 'lng': 101.6045, 'zoom': 16}
+    map_data = {
+        'center': MMU_CYBERJAYA_BOUNDS['center'],
+        'bounds': [
+            [MMU_CYBERJAYA_BOUNDS['south'], MMU_CYBERJAYA_BOUNDS['west']],
+            [MMU_CYBERJAYA_BOUNDS['north'], MMU_CYBERJAYA_BOUNDS['east']]
+        ],
+        'locations': []
+    }
     items = Item.query.filter_by(owner_id=1).all()  # Demo: user_id=1
-    return render_template('map.html', item={'name': 'All Items'}, center=mmu_coords, locations=items)
-
+    return render_template('map.html', 
+                         item={'name': 'All Items'}, 
+                         map_data=map_data,
+                         locations=items)
 # Specific item map
 @app.route('/item/<int:item_id>/map')
 def item_map(item_id):
     item = Item.query.get_or_404(item_id)
-    scans = ScanHistory.query.filter_by(item_id=item_id).all()
-    mmu_coords = {'lat': 3.0648, 'lng': 101.6045, 'zoom': 16}
-    return render_template('map.html', item=item, center=mmu_coords, locations=scans)
+    scans = ScanHistory.query.filter_by(item_id=item_id).order_by(ScanHistory.scan_time.desc()).all()
+    
+    # Filter scans to only include those within MMU bounds
+    valid_scans = []
+    for scan in scans:
+        if (MMU_CYBERJAYA_BOUNDS['south'] <= scan.location_lat <= MMU_CYBERJAYA_BOUNDS['north'] and
+            MMU_CYBERJAYA_BOUNDS['west'] <= scan.location_lng <= MMU_CYBERJAYA_BOUNDS['east']):
+            valid_scans.append(scan)
+    
+    scan_locations = []
+    for i, scan in enumerate(valid_scans[:5]):  # Limit to 5 most recent
+        scan_locations.append({
+            'lat': scan.location_lat,
+            'lng': scan.location_lng,
+            'time': scan.scan_time.strftime('%Y-%m-%d %H:%M:%S'),
+            'ip': scan.scanner_ip
+        })
+    
+    # Add campus bounds to the map data
+    map_data = {
+        'center': MMU_CYBERJAYA_BOUNDS['center'],
+        'bounds': [
+            [MMU_CYBERJAYA_BOUNDS['south'], MMU_CYBERJAYA_BOUNDS['west']],
+            [MMU_CYBERJAYA_BOUNDS['north'], MMU_CYBERJAYA_BOUNDS['east']]
+        ],
+        'locations': scan_locations
+    }
+    
+    return render_template('map.html', 
+                         item=item, 
+                         map_data=map_data)
 
 @app.route('/item/<int:item_id>/share', methods=['GET', 'POST'])
 def share_item(item_id):
