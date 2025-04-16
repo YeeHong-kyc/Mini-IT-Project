@@ -7,7 +7,7 @@
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
-  <form action="/register" method="POST">
+  <form action="/register" method="POST" onsubmit="return validatePasswords()">
      <div class="container">
            <h1>Register</h1>
       <p>Please fill in this form to create an account.</p>
@@ -19,7 +19,7 @@
     </div>
     <div class="#password"><b>Password</b>
               <div class="input-box"></div>
-              <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
+              <input type="password" placeholder="Enter Password" name="password" id="password" required>
     </div>
     <div class="#psw-repeat"><b>Repeat Password</b>
               <div class="input-box"></div>
@@ -44,6 +44,20 @@
     <div class="containersignin">
              <p>Already have an account? <a href="{{ url_for('home') }}">Sign in</a>.</p>
     </div>
+    </div>
   </form>
+
+  <script>
+    function validatePasswords() {
+      var password = document.getElementById("password").value;
+      var confirm = document.getElementById("psw-repeat").value;
+
+      if (password !== confirm) {
+        document.getElementById("message").innerText = "Passwords do not match.";
+        return false; 
+      }
+
+      return true; }
+  </script>
 </body>
 </html>
