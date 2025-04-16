@@ -23,13 +23,17 @@ body {
     width: 350px;
     height: 50px;
     background-color: #b7e8ea;
-    color: rgb(8, 0, 0);
+    color: rgb(0, 0, 0);
     text-align: left;
     border: 2px solid rgba(0, 0, 0, 0.2);
     border-radius: 40px;
     font-size: 16px;
     padding: 20px 45px 20px 20px;
     outline: none;
+}
+
+#email, #psw, #psw-repeat {
+    color: black !important; 
 }
 
 .email h2, .psw h2, .psw-repeat h2 {
@@ -51,7 +55,7 @@ body {
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
     outline: none;
 }
 
@@ -87,7 +91,7 @@ body {
 .registerbtn {
     width: 50%;
     height: 45px;
-    background: #fff;
+    background: #ffffff;
     color: #000000;
     border: none;
     border-radius: 40px;
@@ -106,7 +110,7 @@ hr {
 }
 
 .input-box input::placeholder {
-    color: black;
+    color: rgb(255, 255, 255);
 }
 
 .input-box input {
@@ -117,6 +121,7 @@ hr {
     outline: none;
     font-size: 16px;
     background-color: #000000;
+    box-shadow: #000000;
 }
 
 .input-box i {
