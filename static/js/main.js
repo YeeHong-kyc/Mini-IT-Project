@@ -1,4 +1,4 @@
-// Main JavaScript for Lost & Found Tracker
+// Main JavaScript for Tracker
 
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize tooltips

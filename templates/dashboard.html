@@ -27,7 +27,7 @@
             <div class="card-body">
                 <h5 class="card-title">{{ shared.item.name }}</h5>
                 <p class="card-text">Shared by: {{ shared.item.owner.name }}</p>
-                <div class="d-flex gap-2">  <!-- Added flex container for buttons -->
+                <div class="d-flex gap-2">  
                     <a href="{{ url_for('view_item', item_id=shared.item.id) }}" class="btn btn-primary">View Details</a>
                     <a href="{{ url_for('item_map', item_id=shared.item.id) }}" class="btn btn-info">Track on Map</a>
                 </div>
