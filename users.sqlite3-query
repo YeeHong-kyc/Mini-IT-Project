@@ -1,0 +1,3 @@
+-- database: ./mmu.db
+
+SELECT * FROM "users";

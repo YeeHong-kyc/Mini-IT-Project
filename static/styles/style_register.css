@@ -18,7 +18,7 @@ body {
     background-position: center;
 }
 
-#email, #psw, #psw-repeat {
+#email, #password, #psw-repeat {
     
     width: 350px;
     height: 50px;
@@ -32,16 +32,16 @@ body {
     outline: none;
 }
 
-#email, #psw, #psw-repeat {
+#email, #password, #psw-repeat {
     color: black !important; 
 }
 
-.email h2, .psw h2, .psw-repeat h2 {
+.email h2, .password h2, .psw-repeat h2 {
     font-size: 36px;
     margin-bottom: 20px;
 }
 
-#email, #psw, #psw-repeat ::placeholder{
+#email, #password, #psw-repeat ::placeholder{
   color: rgba(0, 0, 0, 0.1);
 }
 
