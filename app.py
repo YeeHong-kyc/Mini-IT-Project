@@ -37,6 +37,10 @@ def dashboard():
     shared_items = SharedItem.query.filter_by(user_id=user_id).all()
     return render_template('dashboard.html', items=items, shared_items=shared_items)
 
+@app.route('/about-us')
+def about_us():
+    return render_template('About_us.html')
+
 @app.route('/item/new', methods=['GET', 'POST'])
 def new_item():
     if request.method == 'POST':
