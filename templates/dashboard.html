@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Your Items</h2>
+<h2>My Items</h2>
 <div class="row">
     {% for item in items %}
     <div class="col-md-4 mb-4">
@@ -14,12 +14,16 @@
                     <a href="{{ url_for('item_map', item_id=item.id) }}" class="btn btn-info">Track on Map</a>
                 </div>
             </div>
+            {% else %}
+            <div class="card-body">
+                You have no items needed to use this app yet. Well done!
+            </div>
         </div>
     </div>
     {% endfor %}
 </div>
 
-<h2>Shared With You</h2>
+<h2>Shared With Me</h2>
 <div class="row">
     {% for shared in shared_items %}
     <div class="col-md-4 mb-4">
@@ -28,9 +32,13 @@
                 <h5 class="card-title">{{ shared.item.name }}</h5>
                 <p class="card-text">Shared by: {{ shared.item.owner.name }}</p>
                 <div class="d-flex gap-2">  
-                    <a href="{{ url_for('view_item', item_id=shared.item.id) }}" class="btn btn-primary">View Details</a>
+                    <a href="{{ url_for('shared_items', item_id=shared.item.id) }}" class="btn btn-primary">View Details</a>
                     <a href="{{ url_for('item_map', item_id=shared.item.id) }}" class="btn btn-info">Track on Map</a>
                 </div>
+            </div>
+            {% else %}
+            <div class="card-body">
+                No items have been shared with you yet
             </div>
         </div>
     </div>

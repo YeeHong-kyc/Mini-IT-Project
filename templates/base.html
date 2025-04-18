@@ -12,9 +12,11 @@
         <div class="container">
             <a class="navbar-brand" href="{{ url_for('dashboard') }}">Where Is My MMU Stuff</a>
             <div class="navbar-nav">
+                <a class="nav-link" href="{{ url_for('About_us') }}">About Us</a>
+                <a class="nav-link" href="{{ url_for('guideline') }}">Guideline</a>
+                <a class="nav-link" href="{{ url_for('service') }}">Service</a>
                 <a class="nav-link" href="{{ url_for('map') }}">Map</a>
                 <a class="nav-link" href="{{ url_for('new_item') }}">New Item</a>
-                <a class="nav-link" href="{{ url_for('shared_items') }}">Shared items</a>
             </div>
         </div>
     </nav>

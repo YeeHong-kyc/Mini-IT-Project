@@ -73,7 +73,7 @@ def new_item():
         flash('Item created successfully!', 'success')
         return redirect(url_for('view_item', item_id=item.id))
     
-    return render_template('new_item.html')
+    return render_template('item_description.html')
 
 @app.route('/item/<int:item_id>')
 def view_item(item_id):
